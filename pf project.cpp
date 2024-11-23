@@ -18,9 +18,9 @@ typedef struct {
     int exitStop;
 } Passenger;
 
-int* seats;  // Dynamically allocated array for seat availability
-Passenger* passengers;  // Dynamically allocated array for passenger details
-char** stops;  // Dynamically allocated array for stop names
+int* seats;  
+Passenger* passengers;  
+char** stops;
 
 void getCurrentTime(char* buffer) {
     time_t t = time(NULL);
@@ -83,7 +83,7 @@ void exitPassenger() {
     }
 
     printf("Fare: $%.2f\n", fare);
-    seats[seat] = 0; // Free the seat, but keep passenger data
+    seats[seat] = 0; 
 }
 
 void checkRecords() {
@@ -96,9 +96,9 @@ void checkRecords() {
         return;
     }
 
-    int found = 0; // Flag to check if any records exist
+    int found = 0; 
     for (int i = 0; i < TOTAL_SEATS; i++) {
-        if (passengers[i].entryStop >= 0) { // Check if passenger data exists
+        if (passengers[i].entryStop >= 0) { 
             found = 1;
             printf("Seat %d: %s\n", i, seats[i] == 1 ? "Occupied" : "Exited");
             printf("  CNIC: %s\n", passengers[i].cnic);
@@ -126,13 +126,12 @@ void initialize() {
     passengers = (Passenger*)malloc(TOTAL_SEATS * sizeof(Passenger));
     stops = (char**)malloc(TOTAL_STOPS * sizeof(char*));
     for (int i = 0; i < TOTAL_STOPS; i++) {
-        stops[i] = (char*)malloc(20 * sizeof(char)); // Assume max length of stop name is 20
+        stops[i] = (char*)malloc(20 * sizeof(char)); 
     }
 
-    // Initialize seats and stops
     for (int i = 0; i < TOTAL_SEATS; i++) {
-        seats[i] = 0; // All seats are initially free
-        passengers[i].entryStop = -1; // Indicate no passenger data exists
+        seats[i] = 0; 
+        passengers[i].entryStop = -1;
     }
     strcpy(stops[0], "Stop1");
     strcpy(stops[1], "Stop2");
